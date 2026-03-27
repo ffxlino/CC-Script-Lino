@@ -31,11 +31,11 @@ local function pickSlot(srcWrapped, filter)
 end
 
 function transferRouter.new(settings, logger)
-  return {
+  return setmetatable({
     settings = settings,
     logger = logger,
     queue = {},
-  }
+  }, { __index = transferRouter })
 end
 
 function transferRouter.enqueue(self, job)

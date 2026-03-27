@@ -2,11 +2,11 @@ local registry = {}
 local adapter = dofile("core/adapters/peripheral_adapter.lua")
 
 function registry.new(logger)
-  return {
+  return setmetatable({
     logger = logger,
     devices = {},
     revision = 0,
-  }
+  }, { __index = registry })
 end
 
 function registry.scan(self)

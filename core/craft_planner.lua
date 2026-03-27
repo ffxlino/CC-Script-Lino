@@ -20,10 +20,10 @@ local function itemCount(itemsByKey, itemId)
 end
 
 function craftPlanner.new(recipeStore)
-  return {
+  return setmetatable({
     recipeStore = recipeStore,
     byOutput = {},
-  }
+  }, { __index = craftPlanner })
 end
 
 local function pickRecipe(byOutput, itemId)

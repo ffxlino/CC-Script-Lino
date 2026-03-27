@@ -5,7 +5,7 @@
 -- Before using, set BASE_URL below to your raw file host directory.
 -- Example: https://raw.githubusercontent.com/<user>/<repo>/<branch>/ccscript
 
-local BASE_URL = "https://raw.githubusercontent.com/ffxlino/CC-Script-Lino/main"
+local BASE_URL = "https://example.com/ccscript"
 
 local FILES = {
   "startup.lua",

@@ -12,6 +12,16 @@ local appUiMod = dofile("ui/app_ui.lua")
 
 local app = {}
 
+local function safeLogInfo(logger, message)
+  if logger and type(logger.info) == "function" then
+    logger:info(message)
+    return
+  end
+  if loggerMod and type(loggerMod.info) == "function" then
+    loggerMod.info(logger, message)
+  end
+end
+
 function app.run()
   local logger = loggerMod.new(settings.eventsLogPath)
   local registry = registryMod.new(logger)
@@ -23,7 +33,7 @@ function app.run()
   local uiState = uiStateMod.new()
   local ui = appUiMod.new(settings)
 
-  logger:info("Application started")
+  safeLogInfo(logger, "Application started")
   uiState:pushMessage("CC Automation started")
 
   local nextScanAt = os.clock()
@@ -71,7 +81,7 @@ function app.run()
     local event = { os.pullEvent() }
     local handled, command = ui:handleEvent(uiState, event)
     if handled and command == "quit" then
-      logger:info("Application stopped by user")
+      safeLogInfo(logger, "Application stopped by user")
       break
     end
   end

@@ -25,14 +25,14 @@ local function safeCall(fn, ...)
 end
 
 function resourceIndex.new(fileStore, settings, logger)
-  return {
+  return setmetatable({
     fileStore = fileStore,
     settings = settings,
     logger = logger,
     items = {},
     fluids = {},
     lastUpdated = 0,
-  }
+  }, { __index = resourceIndex })
 end
 
 function resourceIndex.rebuild(self, devices)

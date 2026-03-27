@@ -29,10 +29,10 @@ local function readCapacity(p)
 end
 
 function energyModel.new()
-  return {
+  return setmetatable({
     machineEnergy = {},
     totals = { stored = 0, capacity = 0 },
-  }
+  }, { __index = energyModel })
 end
 
 function energyModel.rebuild(self, devices)

@@ -29,12 +29,12 @@ end
 function recipeStore.new(fileStore, settings)
   local raw = fileStore.readLuaTable(settings.recipesPath, { schemaVersion = 1, recipes = {} })
   raw.recipes = raw.recipes or {}
-  return {
+  return setmetatable({
     fileStore = fileStore,
     settings = settings,
     db = raw,
     idIndex = indexById(raw.recipes),
-  }
+  }, { __index = recipeStore })
 end
 
 function recipeStore.persist(self)

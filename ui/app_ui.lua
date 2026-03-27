@@ -77,12 +77,12 @@ end
 
 function appUi.new(settings)
   local output, isMonitor, scale = pickOutput(settings)
-  return {
+  return setmetatable({
     out = output,
     isMonitor = isMonitor,
     scale = scale,
     settings = settings,
-  }
+  }, { __index = appUi })
 end
 
 function appUi.render(self, uiState, viewModel)
