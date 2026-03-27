@@ -24,9 +24,9 @@ end
 
 function logger.new(logPath)
   ensureDir(logPath)
-  return {
+  return setmetatable({
     logPath = logPath,
-  }
+  }, { __index = logger })
 end
 
 function logger.append(self, level, message)
